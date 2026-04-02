@@ -1,0 +1,51 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Stores user profile information, roles, and rewards.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "The unique ID of the user." },
+        "email": { "type": "string", "format": "email", "description": "The user's email address." },
+        "displayName": { "type": "string", "description": "The user's display name." },
+        "photoURL": { "type": "string", "format": "url", "description": "The user's profile picture URL." },
+        "role": { "type": "string", "enum": ["user", "driver", "admin"], "description": "The user's role in the system." },
+        "gender": { "type": "string", "enum": ["male", "female", "other"], "description": "The user's gender." },
+        "age": { "type": "integer", "description": "The user's age." },
+        "coins": { "type": "integer", "description": "The user's earned coins." },
+        "totalDistance": { "type": "number", "description": "Total distance traveled by the user." }
+      },
+      "required": ["uid", "email", "displayName", "role", "coins", "totalDistance"]
+    },
+    "Ride": {
+      "title": "Ride",
+      "description": "Stores ride booking information with pricing and preferences.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "The ID of the user who booked the ride." },
+        "pickup": { "type": "string", "description": "The pickup location." },
+        "dropoff": { "type": "string", "description": "The dropoff location." },
+        "vehicleType": { "type": "string", "enum": ["bike", "auto", "car", "premium"], "description": "The type of vehicle booked." },
+        "seaterCapacity": { "type": "integer", "description": "Selected seater capacity for cars." },
+        "status": { "type": "string", "enum": ["pending", "accepted", "ongoing", "completed", "cancelled"], "description": "The current status of the ride." },
+        "price": { "type": "number", "description": "The total price of the ride." },
+        "distance": { "type": "number", "description": "The distance of the ride in KM." },
+        "paymentMethod": { "type": "string", "enum": ["card", "cash", "coins"], "description": "The payment method used." },
+        "isWomenPreferable": { "type": "boolean", "description": "Whether the user prefers a women-only ride." },
+        "userAge": { "type": "integer", "description": "The age of the user at the time of booking." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "The time the ride was booked." }
+      },
+      "required": ["userId", "pickup", "dropoff", "vehicleType", "status", "price", "distance", "paymentMethod", "isWomenPreferable", "userAge", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile documents."
+    },
+    "/rides/{rideId}": {
+      "schema": "Ride",
+      "description": "Ride booking documents."
+    }
+  }
+}

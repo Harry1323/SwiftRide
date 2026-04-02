@@ -1,0 +1,5 @@
+{
+  "name": "SwiftRide",
+  "description": "A modern ride-hailing platform with AI-powered route optimization and real-time booking, inspired by Uber and Ola.",
+  "requestFramePermissions": ["geolocation"]
+}
